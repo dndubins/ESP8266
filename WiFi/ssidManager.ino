@@ -2,7 +2,7 @@
 // Connects to an expected (programmed) SSID and if that doesn't work, starts the WiFi manager
 // to set up a local SSID, so you can connect to the MCU with your phone, and connect it wireless
 // from there.
-// Library: https://github.com/tzapu/WiFiManager 2.0.17 (available through Library Manager)
+// Library: https://github.com/tzapu/WiFiManager by tzapu, v2.0.17 (available through Library Manager)
 
 #include <ESP8266WiFi.h>
 
