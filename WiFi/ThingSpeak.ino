@@ -1,5 +1,7 @@
 //ThingSpeak.ino
 //Report one or more values to thingspeak.mathworks.com
+//Author: D. Dubins
+//Date: 04-May-25
 #include <ESP8266WiFi.h>
 // WiFi setup:
 const char* ssid = "mySSID";       // replace with your WiFi network ssid
@@ -33,6 +35,7 @@ void loop() {
     String postStr = Write_API_Key;
     postStr += "&field1=";
     postStr += String(t);
+    //Optional: Add more fields if needed
     //postStr +="&field2="; // revise as necessary for number of fields used
     //postStr += String(v); // example data for field2.
     client.print("POST /update HTTP/1.1\n");
@@ -48,8 +51,9 @@ void loop() {
     Serial.print(t); // add data for field1
     //Serial.print(", Measure 2: ");
     //Serial.print(v); // send field2 data
-    Serial.println(""); // add LN for end of postStr
-    // Wait for server response
+    Serial.println(""); // add LN for end of Serial Monitor print
+    //Wait for server response.
+    //The following code was created with the assistance of ChatGPT 4.0, an AI language model by OpenAI.
     unsigned long timeout = millis();
     while (client.available() == 0) {
       if (millis() - timeout > 5000) {
