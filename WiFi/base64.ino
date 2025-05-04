@@ -7,12 +7,12 @@
 //To decode online, visit: https://www.base64decode.org/
 
 void setup() {
-  Serial.begin(115200); //start the Serial Monitor
-  delay(5000);
+  Serial.begin(115200); // start the Serial Monitor
+  delay(5000); // wait a bit
   char input[] = "Hello world!";  // input string to encode
-  char* encoded = base64_encode(input);  // Encode the string
-  Serial.println(encoded);  // Outputs "SGVsbG8gd29ybGQh"
-  free(encoded); // Free the dynamically allocated memory after use
+  char* encoded = base64_encode(input);  // encode the string
+  Serial.println(encoded);  // outputs "SGVsbG8gd29ybGQh"
+  free(encoded); // free the dynamically allocated memory after use
 }
 
 void loop() {
