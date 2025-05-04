@@ -60,15 +60,11 @@ byte emailSend(int reading1, String line1) {
   char usr[] = SMTP2GO_USER;
   int usr_len = strlen(usr);
   int usr_encoded_len = 4 * ((usr_len + 2) / 3);
-  char usr_encoded[usr_encoded_len + 1];     // +1 for null terminator
-  base64_encode(usr, usr_len, usr_encoded);  //encode username
+  char* usr_encoded=base64_encode(usr);  //encode username
   //Encode password to base64 (required for SMTP2GO)
   char pass[] = SMTP2GO_PASS;
-  int pass_len = strlen(pass);
-  int pass_encoded_len = 4 * ((pass_len + 2) / 3);
-  char pass_encoded[pass_encoded_len + 1];      // +1 for null terminator
-  base64_encode(pass, pass_len, pass_encoded);  //encode username
-  //Serial.print("User encoded: ");  //for error checking
+  char* pass_encoded=base64_encode(pass);  //encode password
+  //Serial.print("User encoded: ");  //for debugging
   //Serial.println(usr_encoded);
   //Serial.print("Pass encoded: ");
   //Serial.println(pass_encoded);
@@ -101,11 +97,13 @@ byte emailSend(int reading1, String line1) {
   Serial.println(F("Sending User"));
 #endif
   client.println(usr_encoded);
+  free(usr_encoded);
   if (!eRcv()) return 0;
 #ifdef SERIALDEBUG
   Serial.println(F("Sending Password"));
 #endif
   client.println(pass_encoded);  //  SMTP Passw
+  free(pass_encoded);
   if (!eRcv()) return 0;
 #ifdef SERIALDEBUG
   Serial.println(F("Sending From"));  // change to your email address (sender)
@@ -180,9 +178,19 @@ byte eRcv() {
   return 1;
 }
 
-//The following function was written by Perplexity.AI to encode a string into base 64:
-void base64_encode(const char* input, int input_len, char* output) {
+//The following function was written with the assistance of Perplexity.AI and ChatGPT 4.0 to encode a string into base 64:
+char* base64_encode(const char* input) {
   const char base64_chars[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+  
+  int input_len = strlen(input);
+  int encoded_len = 4 * ((input_len + 2) / 3);  // Calculate encoded string length
+  char* output = (char*) malloc(encoded_len + 1);  // +1 for null terminator
+
+  if (output == NULL) {  // Check if memory allocation succeeded
+    Serial.println("Memory allocation failed!");
+    return NULL;
+  }
+
   int i = 0, j = 0;
   uint8_t byte3[3], byte4[4];
 
@@ -201,6 +209,7 @@ void base64_encode(const char* input, int input_len, char* output) {
     }
   }
 
+  // Handle padding for the last few bytes
   if (i) {
     for (int k = i; k < 3; k++)
       byte3[k] = '\0';
@@ -215,5 +224,7 @@ void base64_encode(const char* input, int input_len, char* output) {
     while (i++ < 3)
       output[j++] = '=';
   }
-  output[j] = '\0';
+
+  output[j] = '\0';  // Null-terminate the output string
+  return output;     // Return the Base64-encoded string
 }
