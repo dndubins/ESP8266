@@ -54,8 +54,7 @@ void loop() {
 }
 
 byte emailSend(int reading1, String line1) {
-  //username and password for SMTP2GO need to be base 64 encoded. Free encoding here: https://www.base64encode.org/
-
+  //Username and password for SMTP2GO need to be base 64 encoded. Free encoding here: https://www.base64encode.org/
   //Encode username to base64 (required for SMTP2GO)
   char usr[] = SMTP2GO_USER;
   int usr_len = strlen(usr);
@@ -96,13 +95,13 @@ byte emailSend(int reading1, String line1) {
 #ifdef SERIALDEBUG
   Serial.println(F("Sending User"));
 #endif
-  client.println(usr_encoded);
+  client.println(usr_encoded);  // SMTP base 64 encoded Username
   free(usr_encoded);
   if (!eRcv()) return 0;
 #ifdef SERIALDEBUG
   Serial.println(F("Sending Password"));
 #endif
-  client.println(pass_encoded);  //  SMTP Passw
+  client.println(pass_encoded);  //  SMTP base 64 encoded Password
   free(pass_encoded);
   if (!eRcv()) return 0;
 #ifdef SERIALDEBUG
