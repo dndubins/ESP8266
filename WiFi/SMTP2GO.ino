@@ -1,8 +1,7 @@
-//SMTP2GO.ino
+//SMTP2GO.ino: Report value by email, using https://www.smtp2go.com
 //Written for NodeMCU 1.0
 //Author: D. Dubins
 //Last Edited: 04-May-25
-//Report value by email, using https://www.smtp2go.com
 
 #include <ESP8266WiFi.h>
 // WiFi setup:
