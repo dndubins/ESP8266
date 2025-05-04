@@ -1,4 +1,4 @@
-//WiFiAccessPoint.ino
+//WiFiAccessPoint.ino: WiFi Access Point
 //Set the NodeMCU 1.0 v3 up as a WiFi access point, and start a simple web server. 
 //Connect to the ESP8266 directly, then go to http://192.168.4.1 in a web browser
 //connected to this access point.
