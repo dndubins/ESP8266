@@ -1,5 +1,4 @@
-//ThingSpeak.ino
-//Report one or more values to thingspeak.mathworks.com
+//ThingSpeak.ino: Report one or more values to https://thingspeak.mathworks.com
 //Author: D. Dubins
 //Date: 04-May-25
 #include <ESP8266WiFi.h>
