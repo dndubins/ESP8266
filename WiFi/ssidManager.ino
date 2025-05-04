@@ -1,4 +1,4 @@
-// ssidManager.ino 
+// ssidManager.ino: Connect to WiFi and use WiFiManager on Fail
 // Connects to an expected (programmed) SSID and if that doesn't work, starts the WiFi manager
 // to set up a local SSID, so you can connect to the MCU with your phone, and connect it wireless
 // from there.
