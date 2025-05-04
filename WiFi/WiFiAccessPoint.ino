@@ -1,11 +1,11 @@
-//WiFiAccessPoint.ino: WiFi Access Point
-//Set the NodeMCU 1.0 v3 up as a WiFi access point, and start a simple web server. 
-//Connect to the ESP8266 directly, then go to http://192.168.4.1 in a web browser
-//connected to this access point.
-//Written by: ChatGPT 4.0
-//Requested by: D. Dubins
-//Date: 03-Mar-25
-//User toggles the on-board LED on and off.
+// WiFiAccessPoint.ino: WiFi Access Point
+// Set the NodeMCU 1.0 v3 up as a WiFi access point, and start a simple web server. 
+// Connect to the ESP8266 directly, then go to http://192.168.4.1 in a web browser
+// connected to this access point.
+// Written by: ChatGPT 4.0
+// Requested by: D. Dubins
+// Date: 03-Mar-25
+// User toggles the on-board LED on and off.
 #include <ESP8266WiFi.h> // Include the WiFi library for ESP8266
 #include <WiFiClient.h>  // Used for creating TCP connections
 #include <ESP8266WebServer.h> // Web server library
