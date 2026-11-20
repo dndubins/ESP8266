@@ -10,8 +10,8 @@
 #include <ESP8266WiFi.h>
 
 #ifndef STASSID
-#define STASSID "PB860"
-#define STAPSK "pharmacy"
+#define STASSID "ssid" // change this to the ssid of your wireless router
+#define STAPSK "password" // change this to the password of your wireles router
 #endif
 
 const char* ssid = STASSID;
