@@ -11,7 +11,7 @@
 
 #ifndef STASSID
 #define STASSID "ssid" // change this to the ssid of your wireless router
-#define STAPSK "password" // change this to the password of your wireles router
+#define STAPSK "password" // change this to the password of your wireless router
 #endif
 
 const char* ssid = STASSID;
