@@ -5,6 +5,7 @@
 // Written by: ChatGPT 4.0
 // Requested by: D. Dubins
 // Date: 03-Mar-25
+// Last Updated: 19-Nov-26
 // User toggles the on-board LED on and off.
 
 #include <ESP8266WiFi.h> // Include the WiFi library for ESP8266
@@ -17,12 +18,12 @@
 #endif
 
 const char *ssid = APSSID;  //store APSSID to ssid
-const char *password = APPSK; //stor APPSK to password
+const char *password = APPSK; //store APPSK to password
 
 ESP8266WebServer server(80);  //Create a web server object that listens on port 80 (HTTP)
 
-const int ledPin = 2; // Variable to keep track of LED state (off by default)
-bool ledState = false;
+const int ledPin = 2;  // our led pin number definition
+bool ledState = false; // Variable to keep track of LED state (off by default)
 
 void handleRoot() {
   float volts=analogRead(A0)*3.3/1023.0; // read divs on pin A0 and convert to volts
@@ -41,13 +42,14 @@ void handleRoot() {
 
 void handleToggle() {
   ledState = !ledState; // Flip the LED state (on to off or off to on)
-  digitalWrite(ledPin,ledState?LOW:HIGH); // Turn LED on (LOW) or off (HIGH)
-  handleRoot();  // Reload the main page to show updated state
+  digitalWrite(ledPin, ledState ? LOW : HIGH); // Turn LED on (LOW) or off (HIGH)
+  server.sendHeader("Location", "/"); // Tell the browser to go back to the main page
+  server.send(303);                   // 303 "See Other": follow up with a GET request
 }
 
 void setup() {
   Serial.begin(115200); // start Serial Monitor
-  delay(5000);  // Short delay to allow everything to settle
+  delay(2000);  // Short delay to allow everything to settle
   pinMode(ledPin, OUTPUT);  // Set the LED pin as an output
   digitalWrite(ledPin, HIGH); // Turn LED off (active LOW)
   // Start setting up the access point
